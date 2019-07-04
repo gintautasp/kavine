@@ -15,6 +15,6 @@ public class RuosiamasPatiekalas extends Patiekalas {
 
 	public int trukmeRuosimo() {
 		
-		return bus_patiektas_apytiksliai_uz;
+		return bus_paruostas_uz;
 	}	
 }

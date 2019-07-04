@@ -40,6 +40,7 @@ public class Uzsakymai {
 				
 					trukme_ruosimo = Integer.parseInt( langeliai [ 1 ] );		
 				}
+				
 				if ( langeliai.length > 2 ) {
 
 					trukme_kaitinimo = Integer.parseInt( langeliai [ 2 ] );
@@ -71,6 +72,10 @@ public class Uzsakymai {
 		}
 	}
 	
+	/**
+	* virëjas ruoðia patiekalus
+	*
+	*/
 	public void ruostiPatiekalus() {
 		
 		int virejas_uztruks = 0;
@@ -79,8 +84,20 @@ public class Uzsakymai {
 			
 			if ( patiekalai [ i ].trukmeRuosimo() > 0 ) {
 				
-				patiekalai [ i ].busPradetasRuostiUz( virejas_uztruks );
-				virejas_uztruks += patiekalai [ i ].trukmeRuosimo();
+				patiekalai [ i ].busPradetasRuostiUz( virejas_uztruks ); // 	      prisumuojam prie ruoðimo laiko
+				
+				virejas_uztruks = patiekalai [ i ].trukmeRuosimo();  //               kada galës ruoðti kità patiekalà
+				
+				/* ---------------------------------------------------------- tikrinimas
+				if (i == 4) {
+					
+					System.out.println(  
+							
+						patiekalai [ i ].bus_paruostas_uz + " " + patiekalai [ i ].bus_patiektas_apytiksliai_uz 
+					);
+					System.out.println( i + " --- " + virejas_uztruks);
+				}
+				*/
 			}
 		}
 	}
@@ -90,26 +107,35 @@ public class Uzsakymai {
 		int padavejos_laikas = 0;
 		boolean uzsakymai_ivykdyti = false;
 	
-		while ( ! uzsakymai_ivykdyti ) {
+		while ( ! uzsakymai_ivykdyti ) {							// kol yra neávykdytø uþsakymø
 			
-			uzsakymai_ivykdyti = true;	
-			boolean padaveja_pateike = false;			
+			uzsakymai_ivykdyti = true;								// o gal jie ávykdyti? 	
+			boolean padaveja_pateike = false;						// kol kas padavëja nieko nepatiekë
 			
-			for (int i = 0; i < kiek_patiekalu; i++) {
+			for (int i = 0; i < kiek_patiekalu; i++) {				// perþiûrime patiekalø sàraðà:
 				
-				if ( patiekalai [ i ].bukle != PatiekaluPateikimoBusenos.Patiektas) {
+				if ( patiekalai [ i ].bukle != PatiekaluPateikimoBusenos.Patiektas) { // radom nepatiektà patiekalà >>> a1
 				
-					if ( ( patiekalai [ i ].trukmePateikimo() <= padavejos_laikas ) && ! padaveja_pateike ) {
-						
+					if ( 
+								( patiekalai [ i ].trukmePateikimo() <= padavejos_laikas ) // ar jau paruoðtas
+							&& 
+								! padaveja_pateike 											// ir padavëja nieko naptiekë
+					) {
+						/*
+						 * patiekalo pateikimas
+						 */
 						patiekalai [ i ].bukle = PatiekaluPateikimoBusenos.Patiektas;
 						padavejos_laikas += 2;
-						padaveja_pateike = true; 
-						System.out.println ( "laikas: " +  padavejos_laikas + " patiekalas" + patiekalai[ i ].pavadinimas );
+						padaveja_pateike = true; 							// ðitos perþiûros metu paitekë patiekalà
+						System.out.println ( 								// iðvedam praneðimà, apie patiekimo laikà ..
+								"laikas: " +  padavejos_laikas + 
+								" patiekalas: " + patiekalai[ i ].pavadinimas // .. ir pavadinimà.
+						);
 					}
-					uzsakymai_ivykdyti = false;
+					uzsakymai_ivykdyti = false;									// <<< a1 uþsakymai dar buvo neávykdyti
 				}
 			}
-			if ( ! padaveja_pateike ) {
+			if ( ! padaveja_pateike ) {	// jei nieko nepatiekë laikas didëja 1-a minute
 				
 				padavejos_laikas++;
 			}

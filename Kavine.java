@@ -8,6 +8,7 @@ public class Kavine {
 		Uzsakymai uzsakymai = new Uzsakymai();
 		uzsakymai.nuskaitytiIsFailo( "uzsakymai.csv" );
 		uzsakymai.ruostiPatiekalus();
+		uzsakymai.patiekti();
 		uzsakymai.parodyti();
 	}
 }

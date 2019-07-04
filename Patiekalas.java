@@ -1,8 +1,6 @@
 package kavine;
 
 public class Patiekalas {
-		
-
 	
 	public String pavadinimas;
 	public int bus_paruostas_uz; /* minutemis */
@@ -16,6 +14,7 @@ public class Patiekalas {
 	public Patiekalas( String pavadinimas ) {
 		
 		this.pavadinimas = pavadinimas;
+		bus_paruostas_uz = 0;
 		bus_patiektas_apytiksliai_uz = 0;
 	}
 	
