@@ -5,6 +5,7 @@ public class Patiekalas {
 	public String pavadinimas;
 	public int bus_paruostas_uz; /* minutemis */
 	public int bus_patiektas_apytiksliai_uz; /* minutemis */
+	public int patiekimo_laikas = 0;
 	public PatiekaluPateikimoBusenos bukle = PatiekaluPateikimoBusenos.Paruoğtas;
 	
 	public Patiekalas() {
@@ -32,6 +33,16 @@ public class Patiekalas {
 	public int trukmePateikimo() {
 		
 		return bus_patiektas_apytiksliai_uz;
+	}
+	
+	public void patiekti(int patiekimo_laikas) {
+		
+		this.patiekimo_laikas = patiekimo_laikas;
+	}
+	
+	public int kadaPatiekta() {
+		
+		return this.patiekimo_laikas; 
 	}
 	
 	public void rodyk() {

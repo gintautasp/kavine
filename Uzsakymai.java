@@ -10,10 +10,12 @@ public class Uzsakymai {
 	
 	public Patiekalas[] patiekalai;
 	public int kiek_patiekalu = 0;
+	public int[] seka_patiekalu;
 	
 	public Uzsakymai() {
 		
 		this.patiekalai = new Patiekalas[100];
+		this.seka_patiekalu = new int [100];
 	}
 
 	public void nuskaitytiIsFailo (String failas) {
@@ -106,6 +108,7 @@ public class Uzsakymai {
 	
 		int padavejos_laikas = 0;
 		boolean uzsakymai_ivykdyti = false;
+		int k = 0;
 	
 		while ( ! uzsakymai_ivykdyti ) {							// kol yra neávykdytø uþsakymø
 			
@@ -127,10 +130,9 @@ public class Uzsakymai {
 						patiekalai [ i ].bukle = PatiekaluPateikimoBusenos.Patiektas;
 						padavejos_laikas += 2;
 						padaveja_pateike = true; 							// ðitos perþiûros metu paitekë patiekalà
-						System.out.println ( 								// iðvedam praneðimà, apie patiekimo laikà ..
-								"laikas: " +  padavejos_laikas + 
-								" patiekalas: " + patiekalai[ i ].pavadinimas // .. ir pavadinimà.
-						);
+						patiekalai [ i ].patiekti ( padavejos_laikas );
+						seka_patiekalu [ k ] = i;
+						k++;
 					}
 					uzsakymai_ivykdyti = false;									// <<< a1 uþsakymai dar buvo neávykdyti
 				}
@@ -142,6 +144,21 @@ public class Uzsakymai {
 		}	
 	}
 	
+	public void isnesioti() {
+		
+		for(int i = 0; i < kiek_patiekalu; i++ ) {
+	
+			System.out.println ( 		// iðvedam praneðimà, apie patiekimo laikà ..
+					
+					"laikas: " +  patiekalai [ seka_patiekalu [ i ] ].kadaPatiekta() 
+					+ " patiekalas: " + patiekalai[ seka_patiekalu [ i ] ].pavadinimas // .. ir pavadinimà.
+			);	
+		}
+	}
+	
+	/*
+	 * pagalbine testine struktura
+	 */
 	public void parodyti() {
 		
 		System.out.println ( "\n----------- uþsakymø eiga:\n" );		

@@ -6,9 +6,10 @@ public class Kavine {
 		// TODO Auto-generated method stub
 
 		Uzsakymai uzsakymai = new Uzsakymai();
-		uzsakymai.nuskaitytiIsFailo( "uzsakymai.csv" );
+		uzsakymai.nuskaitytiIsFailo( "uzsakymai.csv" ); // tik ivedimas
 		uzsakymai.ruostiPatiekalus();
 		uzsakymai.patiekti();
-		uzsakymai.parodyti();
+		uzsakymai.isnesioti(); 							// tik iðvedimas
+		// uzsakymai.parodyti();		
 	}
 }
